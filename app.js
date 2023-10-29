@@ -1,3 +1,4 @@
+const path = require('path');
 const predictDayOfWeek = require("./index");
 
 const express = require('express');
@@ -6,16 +7,18 @@ const app = express();
 app.use(express.json());
 
 const PORT = 3000;
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.send('Hello, Express!');
+    res.sendFile(path.join(__dirname, 'predict.html'));     
 });
 
 app.post('/predict', (req, res) => {
-    const year = req.body.year;
-    const month = req.body.month;
-    const day = req.body.day;
-    const numYear = req.body.numYear;
+    console.log(req.body)
+    const year = parseInt(req.body.year);
+    const month = parseInt(req.body.month);
+    const day = parseInt(req.body.day);
+    const numYear = parseInt(req.body.numYear);
     const timePeriod = req.body.timePeriod;
 
     // Predict date
