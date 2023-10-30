@@ -12,28 +12,14 @@
  * // Returns 'Friday'
  * predictDayOfWeek(2023, 10, 27, 0, 'future');
  */
-const predictDayOfWeek = (year, month, day, numYear, timePeriod) => {
-    const daysOfWeek = {
-        '0': 'Sunday',
-        '1': 'Monday',
-        '2': 'Tuesday',
-        '3': 'Wednesday',
-        '4': 'Thursday',
-        '5': 'Friday',
-        '6': 'Saturday'
-    };
-
-    const futureYear = year + numYear;
-    const pastDate = Math.abs(year - numYear);
-
-    const targetDate = timePeriod === 'future' ? futureYear : pastDate;
-    const d = new Date(targetDate, month - 1, day);
-
-    const futureDate = d.getUTCDay();
-
-    return daysOfWeek[futureDate.toString()];
+const predictDayOfWeek = (year, month, day) => {
+   
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const date=new Date(year, month, day);  
+    return daysOfWeek[date.getDay()];
+       
 };
 
-console.log(predictDayOfWeek(2023, 10, 27, 0, 'future')); // This will print 'Friday' for October 27, 2023.
+console.log(predictDayOfWeek(2023, 10, 28)); // This will print 'Friday' for October 27, 2023.
 
 module.exports = predictDayOfWeek;
