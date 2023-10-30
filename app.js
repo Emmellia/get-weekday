@@ -19,18 +19,16 @@ app.post("/predict", async (req, res) => {
   const year = parseInt(req.body.year);
   const month = parseInt(req.body.month);
   const day = parseInt(req.body.day);
-  const numYear = parseInt(req.body.numYear);
-  const timePeriod = req.body.timePeriod;
+ 
 
   // Predict date
-  const prediction = predictDayOfWeek(year, month, day, numYear, timePeriod);
+  const prediction = predictDayOfWeek(year, month, day);
 
 
     // Fetch fact from Numbers API using axios
     try {
         const factResponse = await axios.get(`http://numbersapi.com/${month+1}/${day}/date`);
         const fact = factResponse.data;
-        console.log(prediction)
         res.send({ predict: prediction, fact: fact })  // Include fact in the response
     } catch (error) {
         console.error('Error fetching fact:', error);
